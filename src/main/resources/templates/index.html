@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Kotlin show case project: Kotlin MVC</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<p>Get your greeting <a href="/greeting">here</a></p>
+<table border="1" cellpadding="10">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.name}">Name</td>
+        <td th:text="${product.price}">Price</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
