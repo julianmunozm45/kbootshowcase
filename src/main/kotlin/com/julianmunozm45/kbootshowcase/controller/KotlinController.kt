@@ -17,6 +17,7 @@ class KotlinController(private val productService: ProductService) {
     fun homePage(model: Model): String {
         val products = productService.findAll()
         model.addAttribute("products", products)
+        model.addAttribute("total", 0.0)
         return "index"
     }
 
@@ -36,5 +37,12 @@ class KotlinController(private val productService: ProductService) {
         productService.save(product)
         model.addAttribute("product", product)
         return "redirect:/"
+    }
+
+    @GetMapping("/check-out")
+    fun checkOut(model: Model): String {
+        val total = productService.checkout()
+        model.addAttribute("total", total)
+        return "index :: total"
     }
 }
