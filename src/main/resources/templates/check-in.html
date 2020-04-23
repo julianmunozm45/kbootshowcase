@@ -5,10 +5,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<p th:text="${name} + ' what\'re ya buying?'"></p>
+<p th:text="${greet} + ' What\'re ya buying?'"></p>
 <form action="#" th:action="@{/addProduct}" th:object="${product}" method="post">
-    <label for="item">Name</label>
-    <input type="text" th:field="*{name}" id="item" placeholder="Item">
+    <label for="item">Item</label>
+    <input type="text" th:field="*{name}" id="item" placeholder="Name">
     <label for="price">Price</label>
     <input type="number" step="0.01" th:field="*{price}" id="price" placeholder="0.0">
     <input type="submit" value="Add Product">

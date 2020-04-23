@@ -21,12 +21,12 @@ class KotlinController(private val productService: ProductService) {
     }
 
     @GetMapping("/check-in")
-    fun greeting(
-            @RequestParam(name = "name", defaultValue = "Stranger", required = false) name: String,
+    fun checkIn(
+            @RequestParam(name = "greet", defaultValue = "Got some rare things on sale, stranger!", required = false) name: String,
             model: Model
     ): String {
         val product = Product()
-        model.addAttribute("name", name)
+        model.addAttribute("greet", name)
         model.addAttribute("product", product)
         return "check-in"
     }
