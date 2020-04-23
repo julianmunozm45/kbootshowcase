@@ -3,6 +3,8 @@
 <head>
     <title>Kotlin shop counter: Kotlin MVC</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script type="text/javascript" src="/js/src/counter.js"></script>
+    <script type="text/javascript" src="/js/lib/jquery.js"></script>
 </head>
 <body>
 <p>Over <a href="/check-in">here</a> stranger...</p>
@@ -20,5 +22,7 @@
     </tr>
     </tbody>
 </table>
+<button id="checkOutButton" onclick="onCheckOut()">Checkout</button>
+<p id="total" th:fragment="total" th:text="'Total: ' + ${total}"></p>
 </body>
 </html>
