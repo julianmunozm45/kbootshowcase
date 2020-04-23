@@ -32,7 +32,7 @@ class KotlinController(private val productService: ProductService) {
         return "check-in"
     }
 
-    @PostMapping("/addProduct")
+    @PostMapping("/add-product")
     fun addProduct(@ModelAttribute("product") product: Product, result: BindingResult, model: Model): String {
         productService.save(product)
         model.addAttribute("product", product)
