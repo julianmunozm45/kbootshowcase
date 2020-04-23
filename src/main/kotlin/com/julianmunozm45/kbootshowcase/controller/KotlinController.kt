@@ -20,15 +20,15 @@ class KotlinController(private val productService: ProductService) {
         return "index"
     }
 
-    @GetMapping("/greeting")
+    @GetMapping("/check-in")
     fun greeting(
-            @RequestParam(name = "name", defaultValue = "Kotlin", required = false) name: String,
+            @RequestParam(name = "name", defaultValue = "Stranger", required = false) name: String,
             model: Model
     ): String {
         val product = Product()
         model.addAttribute("name", name)
         model.addAttribute("product", product)
-        return "greeting"
+        return "check-in"
     }
 
     @PostMapping("/addProduct")
