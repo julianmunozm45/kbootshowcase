@@ -13,12 +13,14 @@
     <tr>
         <th>Name</th>
         <th>Price</th>
+        <th>Category</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="product : ${products}">
         <td th:text="${product.name}">Name</td>
         <td th:text="${product.price}">Price</td>
+        <td th:text="${product.category.name}">Category</td>
     </tr>
     </tbody>
 </table>
