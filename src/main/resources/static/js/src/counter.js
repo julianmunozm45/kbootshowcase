@@ -7,18 +7,19 @@ $('document').ready(() => {
 
 const loadProducts = (category) => {
     let url = '/filter?categoryId=' + category;
+    console.log('filter - ', url);
     $.ajax({
         type: 'get',
         url: url,
         success: (data) => {
-            console.log(data);
             $('#productsList').html(data);
         },
     })
 }
 
 const onCheckOut = () => {
-    let url = '/check-out';
-    console.log('url ', url);
+    const category = $('#categoriesList option:checked').val();
+    const url = `/check-out?categoryId=${category}`;
+    console.log('checkout - ', url);
     $('#total').load(url);
 };

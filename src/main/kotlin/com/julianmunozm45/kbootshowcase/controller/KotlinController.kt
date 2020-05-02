@@ -1,10 +1,8 @@
 package com.julianmunozm45.kbootshowcase.controller
 
-import com.julianmunozm45.kbootshowcase.model.Category
 import com.julianmunozm45.kbootshowcase.model.Product
 import com.julianmunozm45.kbootshowcase.service.CategoryService
 import com.julianmunozm45.kbootshowcase.service.ProductService
-import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
@@ -19,7 +17,7 @@ class KotlinController(private val productService: ProductService, private val c
     @GetMapping("/")
     fun homePage(model: Model): String {
         val products = productService.findAll()
-        val categories = categoryService.findAll(Sort.by(Sort.Direction.ASC, Category::name.name))
+        val categories = categoryService.findAllSorted()
         model.apply {
             addAllAttributes(mapOf(
                     "products" to products,
@@ -49,15 +47,15 @@ class KotlinController(private val productService: ProductService, private val c
     }
 
     @GetMapping("/check-out")
-    fun checkOut(model: Model): String {
-        val total = productService.checkout()
+    fun checkOut(@RequestParam(name = "categoryId") categoryId: Long = -1, model: Model): String {
+        val total = productService.checkout(categoryId)
         model.addAttribute("total", total)
         return "index :: total"
     }
 
     @GetMapping("/filter")
     fun filterByCategory(@RequestParam(name = "categoryId", required = true) categoryId: Long, model: Model): String {
-        val productsByCategory = productService.findByCategoryId(categoryId)
+        val productsByCategory = productService.findByCategory(categoryId)
         model.addAttribute("products", productsByCategory)
         return "index :: productsList"
     }

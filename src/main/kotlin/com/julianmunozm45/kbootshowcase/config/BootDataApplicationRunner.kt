@@ -15,18 +15,19 @@ class BootDataApplicationRunner(
 ) : ApplicationRunner {
     override fun run(args: ApplicationArguments?) {
 
-        val cousine = Category(name = "Cousine")
+        val all = Category(id = -1L, name = "All")
+        val cusine = Category(name = "Cusine")
         val weapons = Category(name = "Weapons")
         val armor = Category(name = "Armor")
         val accessories = Category(name = "Accessories")
         val items = Category(name = "Items")
-        val categories = listOf(cousine, weapons, armor, accessories, items)
+        val categories = listOf(all, cusine, weapons, armor, accessories, items)
         categoryService.saveAll(categories)
 
         val products = listOf(
-                Product("Roast beef", 12.2, cousine),
+                Product("Roast beef", 12.2, cusine),
                 Product("Dagger", 10.9, weapons),
-                Product("Curry rice", 15.6, cousine),
+                Product("Curry rice", 15.6, cusine),
                 Product("Fishhook", 1.3, items),
                 Product("Onyx", 5440.77, accessories),
                 Product("Hookshot", 209.9, weapons),
@@ -35,7 +36,7 @@ class BootDataApplicationRunner(
                 Product("Sunglasses", 60.6, accessories),
                 Product("Turquoise", 120.66, accessories),
                 Product("Combat knife", 50.0, weapons),
-                Product("Shiitake", 70.4, cousine),
+                Product("Shiitake", 70.4, cusine),
                 Product("Mirror cuirass", 3666.66, armor),
                 Product("Fire rod", 2500.0, weapons),
                 Product("Crystal cloak", 4706.0, armor),
