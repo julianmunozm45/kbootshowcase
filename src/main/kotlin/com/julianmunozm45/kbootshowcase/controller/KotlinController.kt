@@ -1,6 +1,7 @@
 package com.julianmunozm45.kbootshowcase.controller
 
 import com.julianmunozm45.kbootshowcase.model.Product
+import com.julianmunozm45.kbootshowcase.service.CategoryService
 import com.julianmunozm45.kbootshowcase.service.ProductService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -11,13 +12,19 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
 
 @Controller
-class KotlinController(private val productService: ProductService) {
+class KotlinController(private val productService: ProductService, private val categoryService: CategoryService) {
 
     @GetMapping("/")
     fun homePage(model: Model): String {
         val products = productService.findAll()
-        model.addAttribute("products", products)
-        model.addAttribute("total", 0.0)
+        val categories = categoryService.findAllSorted()
+        model.apply {
+            addAllAttributes(mapOf(
+                    "products" to products,
+                    "categories" to categories,
+                    "total" to 0.0
+            ))
+        }
         return "index"
     }
 
@@ -40,9 +47,16 @@ class KotlinController(private val productService: ProductService) {
     }
 
     @GetMapping("/check-out")
-    fun checkOut(model: Model): String {
-        val total = productService.checkout()
+    fun checkOut(@RequestParam(name = "categoryId") categoryId: Long = -1, model: Model): String {
+        val total = productService.checkout(categoryId)
         model.addAttribute("total", total)
         return "index :: total"
+    }
+
+    @GetMapping("/filter")
+    fun filterByCategory(@RequestParam(name = "categoryId", required = true) categoryId: Long, model: Model): String {
+        val productsByCategory = productService.findByCategory(categoryId)
+        model.addAttribute("products", productsByCategory)
+        return "index :: productsList"
     }
 }
