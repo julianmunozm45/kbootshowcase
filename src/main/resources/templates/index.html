@@ -1,30 +1,38 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
     <title>Kotlin shop counter: Kotlin MVC</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="/js/src/counter.js"></script>
-    <script type="text/javascript" src="/js/lib/jquery.js"></script>
 </head>
+
 <body>
-<p>Over <a href="/check-in">here</a> stranger...</p>
-<table border="1" cellpadding="10">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Category</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="product : ${products}">
-        <td th:text="${product.name}">Name</td>
-        <td th:text="${product.price}">Price</td>
-        <td th:text="${product.category.name}">Category</td>
-    </tr>
-    </tbody>
-</table>
-<button id="checkOutButton" onclick="onCheckOut()">Checkout</button>
-<p id="total" th:fragment="total" th:text="'Total: ' + ${total}"></p>
+    <p>Over <a href="/check-in">here</a> stranger...</p>
+    <select id="categoriesList" name="categoriesList">
+        <option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}"></option>
+    </select>
+    <div id="productsList" th:fragment="productsList">
+        <table border="1" cellpadding="10">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.name}">Name</td>
+                    <td th:text="${product.price}">Price</td>
+                    <td th:text="${product.category.name}">Category</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <button id="checkOutButton" onclick="onCheckOut()">Checkout</button>
+    <p id="total" th:fragment="total" th:text="'Total: ' + ${total}"></p>
 </body>
+
 </html>
